@@ -61,7 +61,83 @@
                     }
             }
         }
-        
+        // -1 = gard; 0 = no gard; 1 = pozitie; 3 = pion1; 4 = pion2
+// -1 = gard; 0 = no gard; 1 = pozitie; 3 = pion1; 4 = pion2
+var a = [
+    [1, 0, 1, 0, 1, 0, 1, 0, 3, 0, 1, 0, 1, 0, 1, 0, 1 ],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    [1, 0, 1, 0, 1, 0, 1, 0, 4, 0, 1, 0, 1, 0, 1, 0, 1 ],
+];
+function setup() {
+    createCanvas(800, 600);
+
+    button = createButton('Restart');
+    button.position(1000, 500);
+    button.mousePressed(resetGame);
+    button.size(200);
+
+    button1 = createButton('Add First Player');
+    button1.position(900, 300);
+    button1.size(135, 60);
+    button1.style('background-color', this.buttonColor);
+    button1.mousePressed(displayPlayer1);
+
+    button2 = createButton('Add Second Player');
+    button2.position(900, 350);
+    button2.size(135, 60);
+    button2.style('background-color', this.buttonColor);
+    button2.mousePressed(displayPlayer2);
+
+    button3 = createButton('moveWhite');
+    button3.position(50, 30);
+    button3.size(100);
+    button3.mousePressed(White);
+
+    button4 = createButton('moveBlack');
+    button4.position(50, 470);
+    button4.size(100);
+    button4.mousePressed(Black);
+
+    button5 = createButton('verticalGard');
+    button5.position(50, 60);
+    button5.size(100);
+    button5.mousePressed(vGard1);
+
+    button6 = createButton('horizontalGard');
+    button6.position(50, 90);
+    button6.size(100);
+    button6.mousePressed(hGard1);
+
+    button7 = createButton('verticalGard');
+    button7.position(50, 500);
+    button7.size(100);
+    button7.mousePressed(vGard2);
+
+    button8 = createButton('horizontalGard');
+    button8.position(50, 530);
+    button8.size(100);
+    button8.mousePressed(hGard2);
+
+    button9 = createButton('vs computer');
+    button9.position(830,80);
+    button9.size(100);
+    button9.mousePressed(computergame);
+
+}
     </script>
 </body>
 
