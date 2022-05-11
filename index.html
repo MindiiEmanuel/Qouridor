@@ -20,7 +20,7 @@
 
         function pion2(x, y) {
             //Desenat pion2
-            fill('red');
+            fill('Red');
             ellipse(x, y, 30, 30);
 
         }
@@ -47,14 +47,14 @@
             static ziduri() {
 
                 //zidurile de sus
-                fill('white');
+                fill('blue');
                 for (let i = 0; i < 10; i++)
                     if (ziduri1[i] != 0) {
                         rect(270 + i * 40 + i * 10, 0, 10, 65);
                     }
 
                 //zidurile de jos
-                fill('black');
+                fill('Red');
                 for (let i = 0; i < 10; i++)
                     if (ziduri2[i] != 0) {
                         rect(270 + i * 40 + i * 10, 535, 10, 65);
@@ -102,15 +102,15 @@ function setup() {
     button2.style('background-color', this.buttonColor);
     button2.mousePressed(displayPlayer2);
 
-    button3 = createButton('moveWhite');
+    button3 = createButton('moveBlue');
     button3.position(50, 30);
     button3.size(100);
-    button3.mousePressed(White);
+    button3.mousePressed(Blue);
 
-    button4 = createButton('moveBlack');
+    button4 = createButton('moveRed');
     button4.position(50, 470);
     button4.size(100);
-    button4.mousePressed(Black);
+    button4.mousePressed(Red);
 
     button5 = createButton('verticalGard');
     button5.position(50, 60);
@@ -272,7 +272,311 @@ function insert() {
                     rect(303 + j * 25, 55 + i * 25, 10, 90);
         }
 }
+function mouseClicked() {
+    for (let i = 0; i <= 16; i++)
+        for (let j = 0; j <= 16; j++) {
+            if (a[i][j] == 3) {
+                xBlue = i;
+                yBlue = j
+            }
+            if (a[i][j] == 4) {
+                xRed = i;
+                yRed = j
+            }
+        }
+    jump = 2;
+    //pion albastru
+    if (roundPlayer == 1 && comp ==0)
+        if (moveBlue) {
+            if (mouseX < 727 && mouseX > 287 && mouseY > 80 && mouseY < 520) {
+                //dreapta
+                if (roundPlayer == 1 && mouseX >= xComp + 30 && mouseX <= xComp + 70 && mouseY >= yComp - 20 && mouseY <= yComp + 20 && a[xblue][yblue + 1] > -1)
+                    if (a[xBlue][yBlue + 2] == 4 && a[xBlue][yBlue + 3] > -1 && a[xBlue][yBlue + 4] == 1) {
+                        jump = 4;
+                        xComp = xComp + 100;
+                        roundPlayer = 2;
+                        a[xBlue][yBlue] = 1;
+                        a[xBlue][yBlue + jump] = 3;
+                    }
+                else {
+                    jump = 2;
+                    xComp = xComp + 50;
+                    roundPlayer = 2;
+                    a[xBlue][yBlue] = 1;
+                    a[xBlue][yBlue + jump] = 3
+                }
+                //stanga
+                if (roundPlayer == 1 && mouseX >= xComp - 70 && mouseX <= xComp - 30 && mouseY >= yComp - 20 && mouseY <= yComp + 20 && a[xblue][yblue - 1] > -1)
+                    if (a[xBlue][yBlue - 2] == 4 && a[xBlue][yBlue - 3] > -1 && a[xBlue][yBlue - 4] == 1) {
+                        jump = 4;
+                        xComp = xComp - 100;
+                        roundPlayer = 2;
+                        a[xBlue][yBlue] = 1;
+                        a[xBlue][max(0, yBlue - jump)] = 3
+                    }
+                else {
+                    jump = 2;
+                    xComp = xComp - 50;
+                    roundPlayer = 2;
+                    a[xBlue][yBlue] = 1;
+                    a[xBlue][max(0, yBlue - jump)] = 3
+                }
+                //spate
+                if (roundPlayer == 1 && mouseX >= xComp - 20 && mouseX <= xComp + 20 && mouseY >= yComp - 70 && mouseY <= yComp - 30 && a[xblue - 1][yblue] > -1)
+                    if (a[Blue - 2][yBlue] == 4 && a[xBlue - 3][yBlue] > -1 && a[Blue - 4][yBlue] == 1) {
+                        jump = 4;
+                        yComp = yComp - 100;
+                        roundPlayer = 2;
+                        a[xblue][yblue] = 1;
+                        a[max(0, xblue - jump)][yblue] = 3
+                    }
+                else {
+                    jump = 2;
+                    yComp = yComp - 50;
+                    roundPlayer = 2;
+                    a[xblue][yblue] = 1;
+                    a[max(0, xblue - jump)][yblue] = 3
+                }
+                //fata
+                if (roundPlayer == 1 && mouseX >= xComp - 20 && mouseX <= xComp + 20 && mouseY >= yComp + 30 && mouseY <= yComp + 70 && a[xblue + 1][yblue] > -1)
+                    if (a[xblue + 2][yblue] == 4 && a[xblue + 3][yblue] > -1 && a[xblue + 4][yblue] == 1) {
+                        jump = 4;
+                        yComp = yComp + 100;
+                        roundPlayer = 2;
+                        a[xblue][yblue] = 1;
+                        a[xblue + jump][yblue] = 3
+                    }
+                else {
+                    jump = 2;
+                    yComp = yComp + 50;
+                    roundPlayer = 2;
+                    a[xblue][yblue] = 1;
+                    a[xblue + jump][yblue] = 3
+                }
+            }
+        }
 
+
+    //pion rosu
+    if (roundPlayer == 2)
+        if (moveRed) {
+            if (mouseX < 727 && mouseX > 287 && mouseY > 80 && mouseY < 520) {
+                //dreapta
+                if (roundPlayer == 2 && mouseX >= xUser + 30 && mouseX <= xUser + 70 && mouseY >= yUser - 20 && mouseY <= yUser + 20 && a[xRed][yRed + 1] > -1)
+                    if (a[xRed][yRed + 2] == 3 && a[xRed][yRed + 3] > -1 && a[xRed][yRed + 4] == 1) {
+                        jump = 4;
+                        xUser = xUser + 100;
+                        roundPlayer = 1;
+                        a[xRed][yRed] = 1;
+                        a[xRed][yRed + jump] = 4
+                    }
+                else {
+                    jump = 2;
+                    xUser = xUser + 50;
+                    roundPlayer = 1;
+                    a[xRed][yRed] = 1;
+                    a[xRed][yRed + jump] = 4
+                }
+                //stanga
+                if (roundPlayer == 2 && mouseX >= xUser - 70 && mouseX <= xUser - 30 && mouseY >= yUser - 20 && mouseY <= yUser + 20 && a[xRed][yRed - 1] > -1)
+                    if (a[xRed][yRed - 2] == 3 && a[xRed][yRed - 3] > -1 && a[xRed][yRed - 4] == 1) {
+                        jump = 4;
+                        xUser = xUser - 100;
+                        roundPlayer = 1;
+                        a[xRed][yRed] = 1;
+                        a[xRed][max(0, yRed - jump)] = 4
+                    }
+                else {
+                    jump = 2;
+                    xUser = xUser - 50;
+                    roundPlayer = 1;
+                    a[xRed][yRed] = 1;
+                    a[xRed][max(0, yRed - jump)] = 4
+                }
+                //fata
+                if (roundPlayer == 2 && mouseX >= xUser - 20 && mouseX <= xUser + 20 && mouseY >= yUser - 70 && mouseY <= yUser - 30 && a[xRed - 1][yRed] > -1)
+                    if (a[xRed - 2][yRed] == 3 && a[xRed - 3][yRed] > -1 && a[xRed - 4][yRed] == 1) {
+                        jump = 4;
+                        yUser = yUser - 100;
+                        roundPlayer = 1;
+                        a[xRed][yRed] = 1;
+                        a[max(0, xRed - jump)][yRed] = 4
+                    }
+                else {
+                    jump = 2;
+                    yUser = yUser - 50;
+                    roundPlayer = 1;
+                    a[xRed][yRed] = 1;
+                    a[max(0, xRed - jump)][yRed] = 4
+                }
+                //spate
+                if (roundPlayer == 2 && mouseX >= xUser - 20 && mouseX <= xUser + 20 && mouseY >= yUser + 30 && mouseY <= yUser + 70 && a[xRed + 1][yRed] > -1) {
+                    if (a[xRed + 2][yRed] == 3 && a[xRed + 3][yRed] > -1 && a[xRed + 4][yRed] == 1) {
+                        jump = 4;
+                        yUser = yUser + 100;
+                        roundPlayer = 1;
+                        a[xRed][yRed] = 1;
+                        a[xRed + jump][yRed] = 4
+                    } else {
+                        jump = 2;
+                        yUser = yUser + 50;
+                        roundPlayer = 1;
+                        a[xRed][yRed] = 1;
+                        a[xRed + jump][yRed] = 4
+                    }
+                }
+            }
+        }
+
+    if (roundPlayer == 1 && comp == 0) {
+        if(ziduri1[0]==1)
+        for (i = 0; i < 17; i++)
+            for (j = 0; j < 17; j++)
+                if (i % 2 == 1 && j % 2 == 1) {
+                    if (mouseX >= 300 + j * 25 && mouseX <= 310 + j * 25 && mouseY >= 90 + i * 25 && mouseY <= 105 + i * 25) {
+                        x=i;y=j;
+                        if (vGard) {
+                            if(a[x][y] == 0 && a[x][y - 1] == 0 && a[x][y + 1] == 0)
+                           { a[x][y] = -1;
+                            a[x][y - 1] = -1;
+                            a[x][y + 1] = -1;
+                            roundPlayer = 2;
+                            vGard = false;
+                            ziduri1[zid1]=0;
+                            zid1--;
+                        }
+
+                            verify(3);
+                            if (st) {
+                                a[x][y] = 0;
+                                a[x][y - 1] = 0;
+                                a[x][y + 1] = 0;
+                                roundPlayer = 1;
+                                vGard = true;
+                                zid1++;
+                                ziduri1[zid1]=1;
+                        }
+                            }
+                            verify(4);
+                            if (st) {
+                                a[x][y] = 0;
+                                a[x][y - 1] = 0;
+                                a[x][y + 1] = 0;
+                                roundPlayer = 1;
+                                vGard = true;
+                                zid1++;
+                                ziduri1[zid1]=1;
+                            }
+                        if (hGard) {
+                            if(a[x][y] == 0 && a[x-1][y]== 0 && a[x+1][y] == 0)
+                            {a[x][y] = -2;
+                            a[x - 1][y] = -2;
+                            a[x + 1][y] = -2;
+                            roundPlayer = 2;
+                            hGard = false;
+                            ziduri1[zid1]=0;
+                            zid1--;
+                        }
+
+                            verify(3);
+                            if (st) {
+                                a[x][y] = 0;
+                                a[x - 1][y] = 0;
+                                a[x + 1][y] = 0;
+                                roundPlayer = 1;
+                                hGard = true;
+                                zid1++;
+                                ziduri1[zid1]=1;
+                            }
+                            verify(4);
+                            if (st) {
+                                a[x][y] = 0;
+                                a[x - 1][y] = 0;
+                                a[x + 1][y] = 0;
+                                roundPlayer = 1;
+                                hGard = true;
+                                zid1++;
+                                ziduri1[zid1]=1;
+                            }
+                        }
+                    }
+                }
+            }
+    if (roundPlayer == 2) {
+        if(ziduri2[0]==1)
+        for (i = 0; i < 17; i++)
+            for (j = 0; j < 17; j++)
+                if (i % 2 == 1 && j % 2 == 1) {
+                    if (mouseX >= 300 + j * 25 && mouseX <= 310 + j * 25 && mouseY >= 90 + i * 25 && mouseY <= 105 + i * 25) {
+                        x=i;y=j;
+                        if (vGard) {
+                            if(a[x][y] == 0 && a[x][y - 1] == 0 && a[x][y + 1] == 0)
+                           { a[x][y] = -1;
+                            a[x][y - 1] = -1;
+                            a[x][y + 1] = -1;
+                            roundPlayer = 1;
+                            vGard = false;
+                            ziduri2[zid2]=0;
+                            zid2--;
+                        }
+
+                            verify(3);
+                            if (st) {
+                                a[x][y] = 0;
+                                a[x][y - 1] = 0;
+                                a[x][y + 1] = 0;
+                                roundPlayer = 2;
+                                vGard = true;
+                                zid2++;
+                                ziduri2[zid2]=1;
+                            }
+                            verify(4);
+                            if (st) {
+                                a[x][y] = 0;
+                                a[x][y - 1] = 0;
+                                a[x][y + 1] = 0;
+                                roundPlayer = 2;
+                                vGard = true;
+                                zid2++;
+                                ziduri2[zid2]=1;
+                            }
+                        }
+                        if (hGard) {
+                            if(a[x][y] == 0 && a[x-1][y] == 0 && a[x+1][y] == 0)
+                            {a[x][y] = -2;
+                            a[x - 1][y] = -2;
+                            a[x + 1][y] = -2;
+                            roundPlayer = 1;
+                            hGard = false;
+                            ziduri2[zid2]=0;
+                            zid2--;
+                        }
+
+                            verify(3);
+                            if (st) {
+                                a[x][y] = 0;
+                                a[x - 1][y] = 0;
+                                a[x + 1][y] = 0;
+                                roundPlayer = 2;
+                                hGard = true;
+                                zid2++;
+                                ziduri2[zid2]=1;
+                            }
+                            verify(4);
+                            if (st) {
+                                a[x][y] = 0;
+                                a[x - 1][y] = 0;
+                                a[x + 1][y] = 0;
+                                roundPlayer = 2;
+                                hGard = true;
+                                zid2++;
+                                ziduri2[zid2]=1;
+                            }
+                        }
+                    }
+                }
+        } 
+}
     </script>
 </body>
 
