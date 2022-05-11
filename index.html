@@ -1,48 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Qouridor</title>
 </head>
+
 <body>
     <script src="p5.min.js"></script>
     <script>
-            function pion1(x, y) {
-        //Desenat pion1
-        fill('blue');
-        ellipse(x, y, 30, 30);
-       
-    }
+        function pion1(x, y) {
+            //Desenat pion1
+            fill('blue');
+            ellipse(x, y, 30, 30);
 
-    function pion2(x, y) {
-        //Desenat pion2
-        fill('red');
-        ellipse(x, y, 30, 30);
-    
-    }
-    class Table {
-    static matrice() {
-        erase();
-        rect(0, 0, 200, 600);
-        noErase();
+        }
 
-        // tabla propriu zisa
-        fill("pink");
-        square(200, 0, 600);
+        function pion2(x, y) {
+            //Desenat pion2
+            fill('red');
+            ellipse(x, y, 30, 30);
 
-        //blocurile pe tabla de joc
-        fill('purple');
-        for (let i = 0; i < 17; i++) {
-            for (let j = 0; j < 17; j++) {
-                if(i%2==0 && j%2==0)
-                if (a[i][j] != 0)
-                    square(288 + i * 25, 80 + j * 25, 40);
+        }
+        class Table {
+            static matrice() {
+                erase();
+                rect(0, 0, 200, 600);
+                noErase();
+
+                // tabla propriu zisa
+                fill("pink");
+                square(200, 0, 600);
+
+                //blocurile pe tabla de joc
+                fill('purple');
+                for (let i = 0; i < 17; i++) {
+                    for (let j = 0; j < 17; j++) {
+                        if (i % 2 == 0 && j % 2 == 0)
+                            if (a[i][j] != 0)
+                                square(288 + i * 25, 80 + j * 25, 40);
+                    }
+                }
+            }
+            static ziduri() {
+
+                //zidurile de sus
+                fill('white');
+                for (let i = 0; i < 10; i++)
+                    if (ziduri1[i] != 0) {
+                        rect(270 + i * 40 + i * 10, 0, 10, 65);
+                    }
+
+                //zidurile de jos
+                fill('black');
+                for (let i = 0; i < 10; i++)
+                    if (ziduri2[i] != 0) {
+                        rect(270 + i * 40 + i * 10, 535, 10, 65);
+                    }
             }
         }
-    }
-    
+        
     </script>
 </body>
+
 </html>
