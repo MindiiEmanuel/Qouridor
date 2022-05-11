@@ -27,7 +27,7 @@
         class Table {
             static matrice() {
                 erase();
-                rect(0, 0, 200, 600);
+                rect(0, 0, 1000, 1000);
                 noErase();
 
                 // tabla propriu zisa
@@ -61,7 +61,7 @@
                     }
             }
         }
-        // -1 = gard; 0 = no gard; 1 = pozitie; 3 = pion1; 4 = pion2
+
 // -1 = gard; 0 = no gard; 1 = pozitie; 3 = pion1; 4 = pion2
 var a = [
     [1, 0, 1, 0, 1, 0, 1, 0, 3, 0, 1, 0, 1, 0, 1, 0, 1 ],
@@ -183,6 +183,94 @@ function resetGame() {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [1, 0, 1, 0, 1, 0, 1, 0, 4, 0, 1, 0, 1, 0, 1, 0, 1],
     ];
+}
+
+function insert() {
+    Table.matrice();
+    Table.ziduri();
+    pion1(xComp, yComp);
+    pion2(xUser, yUser);
+    if (input1) {
+        Player1 = input1.value();
+        if (yComp == 500) {
+            textSize(50);
+            textStyle(BOLD);
+            text(Player1 + " Ai castigat !", 300, 300);
+        }
+    }
+    if (input2) {
+        Player2 = input2.value();
+        if (yUser == 100) {
+            textSize(50);
+            textStyle(BOLD);
+            text(Player2 + " Ai castigat !", 300, 300);
+        }
+    }
+    if (vGard) {
+        fill('grey');
+        rect(mouseX - 45, mouseY, 90, 10);
+    }
+    if (hGard) {
+        fill('grey');
+        rect(mouseX, mouseY - 45, 10, 90);
+    }
+    fill('grey');
+    for (let j = 0; j < 17; j++)
+        for (let i = 0; i < 17; i++) {
+            if (a[i][j] == -1)
+                if (i % 2 == 1 && j % 2 == 1)
+                    rect(263 + j * 25, 95 + i * 25, 90, 10);
+            if (a[i][j] == -2)
+                if (i % 2 == 1 && j % 2 == 1)
+                    rect(303 + j * 25, 55 + i * 25, 10, 90);
+        }
+}
+function draw() {
+    // background("gray");
+    insert();
+    computer();
+}
+
+function insert() {
+    Table.matrice();
+    Table.pozitieTabla();
+    Table.ziduri();
+    pion1(xComp, yComp);
+    pion2(xUser, yUser);
+    if (input1) {
+        Player1 = input1.value();
+        if (yComp == 500) {
+            textSize(50);
+            textStyle(BOLD);
+            text(Player1 + " ai castigat !", 300, 300);
+        }
+    }
+    if (input2) {
+        Player2 = input2.value();
+        if (yUser == 100) {
+            textSize(50);
+            textStyle(BOLD);
+            text(Player2 + " ai castigat !", 300, 300);
+        }
+    }
+    if (vGard) {
+        fill('grey');
+        rect(mouseX - 45, mouseY, 90, 10);
+    }
+    if (hGard) {
+        fill('grey');
+        rect(mouseX, mouseY -45, 10, 90);
+    }
+    fill('grey');
+    for (let j = 0; j <= 16; j++)
+        for (let i = 0; i <= 16; i++) {
+            if (a[i][j] == -1)
+                if (i % 2 == 1 && j % 2 == 1)
+                    rect(263 + j * 25, 95 + i * 25, 90, 10);
+            if (a[i][j] == -2)
+                if (i % 2 == 1 && j % 2 == 1)
+                    rect(303 + j * 25, 55 + i * 25, 10, 90);
+        }
 }
 
     </script>
