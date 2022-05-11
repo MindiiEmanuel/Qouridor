@@ -10,18 +10,39 @@
     <script src="p5.min.js"></script>
     <script>
             function pion1(x, y) {
-        //pion1
-        fill('white');
+        //Desenat pion1
+        fill('blue');
         ellipse(x, y, 30, 30);
        
     }
 
     function pion2(x, y) {
-        //pion2
-        fill('black');
+        //Desenat pion2
+        fill('red');
         ellipse(x, y, 30, 30);
     
     }
+    class Table {
+    static matrice() {
+        erase();
+        rect(0, 0, 200, 600);
+        noErase();
+
+        // tabla propriu zisa
+        fill("pink");
+        square(200, 0, 600);
+
+        //blocurile pe tabla de joc
+        fill('purple');
+        for (let i = 0; i < 17; i++) {
+            for (let j = 0; j < 17; j++) {
+                if(i%2==0 && j%2==0)
+                if (a[i][j] != 0)
+                    square(288 + i * 25, 80 + j * 25, 40);
+            }
+        }
+    }
+    
     </script>
 </body>
 </html>
