@@ -11,6 +11,40 @@
 <body>
     <script src="p5.min.js"></script>
     <script>
+
+var xUser = 507;
+var yUser = 500;
+
+var xComp = 507;
+var yComp = 100;
+var ziduri1 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+var ziduri2 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+var input1;
+var input2;
+var moveBlue = false;
+var Player1;
+var moveRed = false;
+var Player2;
+var roundPlayer = 1;
+var xBlue;
+var yBlue;
+var xRed;
+var yRed;
+var jump = 2;
+var vGard = false;
+var hGard = false;
+var cui;
+var cuj;
+var result = [];
+var st;
+var i,j;
+var x,y;
+var zid1=9;
+var zid2=9;
+var comp = 0;
+
+let button;
+
         function pion1(x, y) {
             //Desenat pion1
             fill('blue');
@@ -25,9 +59,28 @@
 
         }
         class Table {
+            static pozitieTabla() {
+                if(yComp == 500)
+                text(input1.value() + "Ai câștigat", 0, 300);
+                if(yUser == 100)
+                text(input2.value() + "Ai câștigat", 0, 300);
+
+    //dungile gri
+    fill("blue");
+    rect(270, 65, 460, 10);
+    rect(270, 525, 460, 10);
+
+    //marginile dintre dungi
+    fill('turquoise');
+    for (let i = 0; i < 9; i++) {
+        rect(280 + i * 40 + i * 10, 5, 40, 60);
+        rect(280 + i * 40 + i * 10, 535, 40, 60);
+    }
+}
             static matrice() {
+
                 erase();
-                rect(0, 0, 1000, 1000);
+                rect(0, 0, 280, 1000);
                 noErase();
 
                 // tabla propriu zisa
@@ -185,46 +238,13 @@ function resetGame() {
     ];
 }
 
-function insert() {
-    Table.matrice();
-    Table.ziduri();
-    pion1(xComp, yComp);
-    pion2(xUser, yUser);
-    if (input1) {
-        Player1 = input1.value();
-        if (yComp == 500) {
-            textSize(50);
-            textStyle(BOLD);
-            text(Player1 + " Ai castigat !", 300, 300);
-        }
-    }
-    if (input2) {
-        Player2 = input2.value();
-        if (yUser == 100) {
-            textSize(50);
-            textStyle(BOLD);
-            text(Player2 + " Ai castigat !", 300, 300);
-        }
-    }
-    if (vGard) {
-        fill('grey');
-        rect(mouseX - 45, mouseY, 90, 10);
-    }
-    if (hGard) {
-        fill('grey');
-        rect(mouseX, mouseY - 45, 10, 90);
-    }
-    fill('grey');
-    for (let j = 0; j < 17; j++)
-        for (let i = 0; i < 17; i++) {
-            if (a[i][j] == -1)
-                if (i % 2 == 1 && j % 2 == 1)
-                    rect(263 + j * 25, 95 + i * 25, 90, 10);
-            if (a[i][j] == -2)
-                if (i % 2 == 1 && j % 2 == 1)
-                    rect(303 + j * 25, 55 + i * 25, 10, 90);
-        }
+function draw() {
+    // background("gray");
+    insert();
+    computer();
 }
+
+
 function draw() {
     // background("gray");
     insert();
@@ -237,22 +257,7 @@ function insert() {
     Table.ziduri();
     pion1(xComp, yComp);
     pion2(xUser, yUser);
-    if (input1) {
-        Player1 = input1.value();
-        if (yComp == 500) {
-            textSize(50);
-            textStyle(BOLD);
-            text(Player1 + " ai castigat !", 300, 300);
-        }
-    }
-    if (input2) {
-        Player2 = input2.value();
-        if (yUser == 100) {
-            textSize(50);
-            textStyle(BOLD);
-            text(Player2 + " ai castigat !", 300, 300);
-        }
-    }
+
     if (vGard) {
         fill('grey');
         rect(mouseX - 45, mouseY, 90, 10);
@@ -290,7 +295,7 @@ function mouseClicked() {
         if (moveBlue) {
             if (mouseX < 727 && mouseX > 287 && mouseY > 80 && mouseY < 520) {
                 //dreapta
-                if (roundPlayer == 1 && mouseX >= xComp + 30 && mouseX <= xComp + 70 && mouseY >= yComp - 20 && mouseY <= yComp + 20 && a[xblue][yblue + 1] > -1)
+                if (roundPlayer == 1 && mouseX >= xComp + 30 && mouseX <= xComp + 70 && mouseY >= yComp - 20 && mouseY <= yComp + 20 && a[xBlue][yBlue + 1] > -1)
                     if (a[xBlue][yBlue + 2] == 4 && a[xBlue][yBlue + 3] > -1 && a[xBlue][yBlue + 4] == 1) {
                         jump = 4;
                         xComp = xComp + 100;
@@ -306,7 +311,7 @@ function mouseClicked() {
                     a[xBlue][yBlue + jump] = 3
                 }
                 //stanga
-                if (roundPlayer == 1 && mouseX >= xComp - 70 && mouseX <= xComp - 30 && mouseY >= yComp - 20 && mouseY <= yComp + 20 && a[xblue][yblue - 1] > -1)
+                if (roundPlayer == 1 && mouseX >= xComp - 70 && mouseX <= xComp - 30 && mouseY >= yComp - 20 && mouseY <= yComp + 20 && a[xBlue][yBlue - 1] > -1)
                     if (a[xBlue][yBlue - 2] == 4 && a[xBlue][yBlue - 3] > -1 && a[xBlue][yBlue - 4] == 1) {
                         jump = 4;
                         xComp = xComp - 100;
@@ -322,36 +327,36 @@ function mouseClicked() {
                     a[xBlue][max(0, yBlue - jump)] = 3
                 }
                 //spate
-                if (roundPlayer == 1 && mouseX >= xComp - 20 && mouseX <= xComp + 20 && mouseY >= yComp - 70 && mouseY <= yComp - 30 && a[xblue - 1][yblue] > -1)
-                    if (a[Blue - 2][yBlue] == 4 && a[xBlue - 3][yBlue] > -1 && a[Blue - 4][yBlue] == 1) {
+                if (roundPlayer == 1 && mouseX >= xComp - 20 && mouseX <= xComp + 20 && mouseY >= yComp - 70 && mouseY <= yComp - 30 && a[xBlue - 1][yBlue] > -1)
+                    if (a[xBlue - 2][yBlue] == 4 && a[xBlue - 3][yBlue] > -1 && a[xBlue - 4][yBlue] == 1) {
                         jump = 4;
                         yComp = yComp - 100;
                         roundPlayer = 2;
-                        a[xblue][yblue] = 1;
-                        a[max(0, xblue - jump)][yblue] = 3
+                        a[xBlue][yBlue] = 1;
+                        a[max(0, xBlue - jump)][yBlue] = 3
                     }
                 else {
                     jump = 2;
                     yComp = yComp - 50;
                     roundPlayer = 2;
-                    a[xblue][yblue] = 1;
-                    a[max(0, xblue - jump)][yblue] = 3
+                    a[xBlue][yBlue] = 1;
+                    a[max(0, xBlue - jump)][yBlue] = 3
                 }
                 //fata
-                if (roundPlayer == 1 && mouseX >= xComp - 20 && mouseX <= xComp + 20 && mouseY >= yComp + 30 && mouseY <= yComp + 70 && a[xblue + 1][yblue] > -1)
-                    if (a[xblue + 2][yblue] == 4 && a[xblue + 3][yblue] > -1 && a[xblue + 4][yblue] == 1) {
+                if (roundPlayer == 1 && mouseX >= xComp - 20 && mouseX <= xComp + 20 && mouseY >= yComp + 30 && mouseY <= yComp + 70 && a[xBlue + 1][yBlue] > -1)
+                    if (a[xBlue + 2][yBlue] == 4 && a[xBlue + 3][yBlue] > -1 && a[xBlue + 4][yBlue] == 1) {
                         jump = 4;
                         yComp = yComp + 100;
                         roundPlayer = 2;
-                        a[xblue][yblue] = 1;
-                        a[xblue + jump][yblue] = 3
+                        a[xBlue][yBlue] = 1;
+                        a[xBlue + jump][yBlue] = 3
                     }
                 else {
                     jump = 2;
                     yComp = yComp + 50;
                     roundPlayer = 2;
-                    a[xblue][yblue] = 1;
-                    a[xblue + jump][yblue] = 3
+                    a[xBlue][yBlue] = 1;
+                    a[xBlue + jump][yBlue] = 3
                 }
             }
         }
