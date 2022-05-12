@@ -564,7 +564,59 @@ function computer(){
         }
     }
 }
+function Blue() {
+    if (roundPlayer == 1 && comp ==0) {
+        hGard = false;
+        vGard = false;
+        moveBlue = true;
+        moveRed = false;
+    }
+}
 
+function Red() {
+    if (roundPlayer == 2) {
+        hGard = false;
+        vGard = false;
+        moveRed = true;
+        moveBlue = false;
+    }
+}
+
+function vGard1() {
+    if (roundPlayer == 1 && comp ==0) {
+        hGard = false;
+        vGard = true;
+        moveBlue = false;
+        moveRed = false;
+    }
+}
+
+function vGard2() {
+    if (roundPlayer == 2) {
+        hGard = false;
+        vGard = true;
+        moveBlue = false;
+        moveRed = false;
+    }
+}
+
+function hGard1() {
+    if (roundPlayer == 1 && comp ==0) {
+        vGard = false;
+        hGard = true;
+        moveBlue = false;
+        moveRed = false;
+    }
+}
+
+function hGard2() {
+    if (roundPlayer == 2) {
+        vGard = false;
+        hGard = true;
+        moveBlue = false;
+        moveRed = false;
+    }
+}
 
     </script>
 </body>
