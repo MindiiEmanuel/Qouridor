@@ -444,29 +444,9 @@ function mouseClicked() {
                             vGard = false;
                             ziduri1[zid1]=0;
                             zid1--;
-                        }
-
-                            verify(3);
-                            if (st) {
-                                a[x][y] = 0;
-                                a[x][y - 1] = 0;
-                                a[x][y + 1] = 0;
-                                roundPlayer = 1;
-                                vGard = true;
-                                zid1++;
-                                ziduri1[zid1]=1;
-                        }
+                        }     
                             }
-                            verify(4);
-                            if (st) {
-                                a[x][y] = 0;
-                                a[x][y - 1] = 0;
-                                a[x][y + 1] = 0;
-                                roundPlayer = 1;
-                                vGard = true;
-                                zid1++;
-                                ziduri1[zid1]=1;
-                            }
+                            
                         if (hGard) {
                             if(a[x][y] == 0 && a[x-1][y]== 0 && a[x+1][y] == 0)
                             {a[x][y] = -2;
@@ -476,28 +456,7 @@ function mouseClicked() {
                             hGard = false;
                             ziduri1[zid1]=0;
                             zid1--;
-                        }
-
-                            verify(3);
-                            if (st) {
-                                a[x][y] = 0;
-                                a[x - 1][y] = 0;
-                                a[x + 1][y] = 0;
-                                roundPlayer = 1;
-                                hGard = true;
-                                zid1++;
-                                ziduri1[zid1]=1;
-                            }
-                            verify(4);
-                            if (st) {
-                                a[x][y] = 0;
-                                a[x - 1][y] = 0;
-                                a[x + 1][y] = 0;
-                                roundPlayer = 1;
-                                hGard = true;
-                                zid1++;
-                                ziduri1[zid1]=1;
-                            }
+                            }     
                         }
                     }
                 }
@@ -518,27 +477,6 @@ function mouseClicked() {
                             vGard = false;
                             ziduri2[zid2]=0;
                             zid2--;
-                        }
-
-                            verify(3);
-                            if (st) {
-                                a[x][y] = 0;
-                                a[x][y - 1] = 0;
-                                a[x][y + 1] = 0;
-                                roundPlayer = 2;
-                                vGard = true;
-                                zid2++;
-                                ziduri2[zid2]=1;
-                            }
-                            verify(4);
-                            if (st) {
-                                a[x][y] = 0;
-                                a[x][y - 1] = 0;
-                                a[x][y + 1] = 0;
-                                roundPlayer = 2;
-                                vGard = true;
-                                zid2++;
-                                ziduri2[zid2]=1;
                             }
                         }
                         if (hGard) {
@@ -550,33 +488,84 @@ function mouseClicked() {
                             hGard = false;
                             ziduri2[zid2]=0;
                             zid2--;
-                        }
-
-                            verify(3);
-                            if (st) {
-                                a[x][y] = 0;
-                                a[x - 1][y] = 0;
-                                a[x + 1][y] = 0;
-                                roundPlayer = 2;
-                                hGard = true;
-                                zid2++;
-                                ziduri2[zid2]=1;
-                            }
-                            verify(4);
-                            if (st) {
-                                a[x][y] = 0;
-                                a[x - 1][y] = 0;
-                                a[x + 1][y] = 0;
-                                roundPlayer = 2;
-                                hGard = true;
-                                zid2++;
-                                ziduri2[zid2]=1;
-                            }
-                        }
-                    }
+                     }          
                 }
-        } 
+            }
+       }
+    } 
 }
+
+function computer(){
+    if(comp==1 && roundPlayer == 1){
+        var row = floor(random(3));
+
+        if(row==0){
+            do{
+            var x = floor(random(16));
+            var y = floor(random(16));}
+            while(x%2==0||y%2==0);
+            var spec = floor(random(2));
+            if (spec == 1 && ziduri1[0]==1) {
+                if(a[x][y] == 0 && a[x][y - 1] == 0 && a[x][y + 1] == 0)
+               { a[x][y] = -1;
+                a[x][y - 1] = -1;
+                a[x][y + 1] = -1;
+                roundPlayer = 2;
+                vGard = false;
+                ziduri1[zid1]=0;
+                zid1--;
+            }
+
+                
+            }
+            if (spec == 0) {
+                if(a[x][y] == 0 && a[x-1][y] == 0 && a[x+1][y] == 0)
+                {a[x][y] = -2;
+                a[x - 1][y] = -2;
+                a[x + 1][y] = -2;
+                roundPlayer = 2;
+                hGard = false;
+                ziduri1[zid1]=0;
+                zid1--;
+            }
+
+               
+            }
+        }
+        else {
+            for(i=0;i<17;i++)
+                for(j=0;j<17;j++)
+                    if(a[i][j]==3)
+                    {
+                        var x = i;
+                        var y = j;
+                    }
+                    if(x+2<=16&&a[x+1][y]>-1 && a[x+2][y]==1){
+                        yComp = yComp +50;
+                        a[x][y]=1;
+                        a[x+2][y]=3;
+                        roundPlayer = 2;
+                    }
+                else if(y+2<=16&&a[x][y+1]>-1 && a[x][y+2]==1){
+                    xComp = xComp + 50;
+                    a[x][y]=1;
+                    a[x][y+2]=3;
+                    roundPlayer = 2;
+                } else if(y-2>0&&a[x][y-1]>-1 && a[x][y-2]==1){
+                    xComp = xComp -50;
+                    a[x][y]=1;
+                    a[x][y-2]=3;
+                    roundPlayer = 2;
+                } else  if(x-2>0&&a[x-1][y]>-1 && a[x-2][y]==1)
+                {yComp = yComp - 50;
+                a[x][y]=1;
+                a[x-2][y]=3;
+                roundPlayer = 2;}
+        }
+    }
+}
+
+
     </script>
 </body>
 
