@@ -74,12 +74,12 @@ let button;
                 
 
     //dungile gri
-    fill("blue");
+    fill("black");
     rect(270, 65, 460, 10);
     rect(270, 525, 460, 10);
 
     //marginile dintre dungi
-    fill('turquoise');
+    fill('white');
     for (let i = 0; i < 9; i++) {
         rect(280 + i * 40 + i * 10, 5, 40, 60);
         rect(280 + i * 40 + i * 10, 535, 40, 60);
@@ -92,11 +92,11 @@ let button;
                 noErase();
 
                 // tabla propriu zisa
-                fill("pink");
+                fill("white");
                 square(200, 0, 600);
 
                 //blocurile pe tabla de joc
-                fill('purple');
+                fill('black');
                 for (let i = 0; i < 17; i++) {
                     for (let j = 0; j < 17; j++) {
                         if (i % 2 == 0 && j % 2 == 0)
